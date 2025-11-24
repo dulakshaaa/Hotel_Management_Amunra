@@ -179,7 +179,7 @@ html,body{height:100%;margin:0;font-family:"Inter",system-ui,Segoe UI,Roboto,Ari
   <div class="brand"><div class="logo">A</div><div style="line-height:1"><div style="font-size:14px">AMUNRA</div><div style="font-size:11px;color:#cfe6d6">Admin Console</div></div></div>
   <div class="actions">
     <div style="display:flex;gap:10px;align-items:center">
-      <button class="btn-ghost" onclick="exportCSV()">Export CSV</button>
+      <button class="btn-ghost" style="color:#000; margin-top: 5px; background-color: white;" onclick="exportCSV()">Export CSV</button>
       <div style="color:#fff;font-weight:600;margin-left:6px">Admin</div>
       <a href="logout.php" class="btn-ghost" style="color:#fff;margin-left:8px">Sign out</a>
     </div>

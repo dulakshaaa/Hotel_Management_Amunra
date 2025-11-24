@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 
-session_start();
+
 
 $errors = [];
 $old = ['username' => '', 'email' => ''];
@@ -97,7 +97,7 @@ h2{color:#c19a53;margin-bottom:10px;}
             </label>
 
             <div style="display:flex;gap:8px;align-items:center;">
-                <button class="btn" type="submit">Register</button>
+                <button class="btn" type="submit">Register</button> <br>
                 <div class="note">Already have an account? <a class="link" href="login.php">Login</a></div>
             </div>
         </form>

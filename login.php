@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: radial-gradient(circle at center, #ffffffff 0%, #fffcf1ff 100%);
             color: #333;
             padding: 40px 20px;
             min-height: 100vh;
@@ -190,9 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Don't have an account? <a href="register.php">Register here</a>
             </div>
             <div class="footer-text" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
-                <strong>Demo credentials:</strong><br>
-                Username: <code>demo</code><br>
-                Password: <code>password</code>
+                
             </div>
         </div>
     </div>
