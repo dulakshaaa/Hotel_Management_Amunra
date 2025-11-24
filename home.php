@@ -1027,7 +1027,7 @@ if ($menu_query) {
             color: #c19a53;
             font-weight: 600;
             text-decoration: none;
-            
+
             border-radius: 6px;
             transition: all 0.3s ease;
             display: flex;
@@ -1137,6 +1137,12 @@ if ($menu_query) {
                 grid-template-columns: 1fr;
             }
         }
+
+        .logo-text {
+            color: var(--primary-color);
+            font-size: 1.2rem !important;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -1157,35 +1163,36 @@ if ($menu_query) {
                     <li><a href="#amenities">Amenities</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#contact">Contact</a></li>
+                </ul>
+                <ul>
+                <!-- User Menu (Logged In) -->
+                <?php if (!empty($_SESSION['user_id'])): ?>
+                    <li class="user-dropdown">
+                        <a href="javascript:void(0)" class="user-name" aria-haspopup="true" aria-expanded="false">
+                            <?php echo htmlspecialchars($_SESSION['username'] ?? 'Guest', ENT_QUOTES, 'UTF-8'); ?>
+                            <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 6px;"></i>
+                        </a>
 
-                    <!-- User Menu (Logged In) -->
-                    <?php if (!empty($_SESSION['user_id'])): ?>
-                        <li class="user-dropdown">
-                            <a href="javascript:void(0)" class="user-name" aria-haspopup="true" aria-expanded="false">
-                                <?php echo htmlspecialchars($_SESSION['username'] ?? 'Guest', ENT_QUOTES, 'UTF-8'); ?>
-                                <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 6px;"></i>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="profile.php" role="menuitem">My Profile</a></li>
-                                <li><a href="bookings.php" role="menuitem">My Bookings</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a href="logout.php" role="menuitem" class="logout-link">
-                                        <i class="fas fa-sign-out-alt"></i> Logout
-                                    </a></li>
-                            </ul>
-                        </li>
-                    <?php else: ?>
-                        <!-- Guest Links -->
-                        <li class="auth-links">
-                            <a href="login.php" class="btn-login">Login</a>
-                        </li>
-                        <li>
-                            <a href="register.php" class="btn-register">Register</a>
-                        </li>
-                    <?php endif; ?>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="profile.php" role="menuitem">My Profile</a></li>
+                            <li><a href="bookings.php" role="menuitem">My Bookings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a href="logout.php" role="menuitem" class="logout-link">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <!-- Guest Links -->
+                    <li class="auth-links">
+                        <a href="login.php" class="btn-login">Login</a>
+                    </li>
+                    <li>
+                        <a href="register.php" class="btn-register">Register</a>
+                    </li>
+                <?php endif; ?>
                 </ul>
 
                 <!-- Mobile Menu Toggle -->
@@ -1196,7 +1203,7 @@ if ($menu_query) {
                 </button>
             </nav>
         </div>
-    </header>>
+    </header>
 
     <!-- Hero Section -->
     <section id="hero">
@@ -1222,7 +1229,7 @@ if ($menu_query) {
                     timeless beauty of the Nile while enjoying world-class amenities and impeccable service.</p>
                 <div class="btn-group">
                     <a href="#rooms" class="btn">View Rooms</a>
-                    
+
                 </div>
             </div>
         </div>
@@ -1337,25 +1344,33 @@ if ($menu_query) {
             </div>
             <div class="rooms-grid">
                 <?php foreach ($rooms as $room): ?>
-                    <div class="room-card <?php echo $room['available_rooms'] === 0 ? 'unavailable' : ''; ?>" data-category="<?php echo htmlspecialchars($room['category']); ?>">
+                    <div class="room-card <?php echo $room['available_rooms'] === 0 ? 'unavailable' : ''; ?>"
+                        data-category="<?php echo htmlspecialchars($room['category']); ?>">
                         <div class="room-image">
-                            <img src="<?php echo htmlspecialchars($room['image_url']); ?>" alt="<?php echo htmlspecialchars($room['name']); ?>">
+                            <img src="<?php echo htmlspecialchars($room['image_url']); ?>"
+                                alt="<?php echo htmlspecialchars($room['name']); ?>">
                             <?php if ($room['available_rooms'] === 0): ?>
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 10;">
-                                    <span style="background: #c62828; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 1rem;">SOLD OUT</span>
+                                <div
+                                    style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 10;">
+                                    <span
+                                        style="background: #c62828; color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 1rem;">SOLD
+                                        OUT</span>
                                 </div>
                             <?php endif; ?>
                         </div>
                         <div class="room-info">
                             <h3><?php echo htmlspecialchars($room['name']); ?></h3>
-                            <div class="room-availability <?php echo $room['available_rooms'] > 0 ? 'availability-available' : 'availability-unavailable'; ?>">
+                            <div
+                                class="room-availability <?php echo $room['available_rooms'] > 0 ? 'availability-available' : 'availability-unavailable'; ?>">
                                 <?php if ($room['available_rooms'] > 0): ?>
-                                    <i class="fas fa-check-circle"></i> <?php echo $room['available_rooms']; ?> of <?php echo $room['total_rooms']; ?> Available
+                                    <i class="fas fa-check-circle"></i> <?php echo $room['available_rooms']; ?> of
+                                    <?php echo $room['total_rooms']; ?> Available
                                 <?php else: ?>
                                     <i class="fas fa-times-circle"></i> No Rooms Available
                                 <?php endif; ?>
                             </div>
-                            <div class="room-price">$<?php echo number_format($room['price'], 2); ?> <span>/ night</span></div>
+                            <div class="room-price">$<?php echo number_format($room['price'], 2); ?> <span>/ night</span>
+                            </div>
                             <p><?php echo htmlspecialchars($room['description']); ?></p>
                             <div class="room-features">
                                 <?php foreach ($room['features'] as $feature): ?>
@@ -1365,7 +1380,10 @@ if ($menu_query) {
                             <div class="room-actions">
                                 <a href="#" class="btn">View Details</a>
                                 <?php if ($room['available_rooms'] > 0): ?>
-                                    <a href="#" class="btn btn-outline open-book" data-room="<?php echo htmlspecialchars($room['name']); ?>" data-room-id="<?php echo $room['id']; ?>" data-price="<?php echo $room['price']; ?>">Book Now</a>
+                                    <a href="#" class="btn btn-outline open-book"
+                                        data-room="<?php echo htmlspecialchars($room['name']); ?>"
+                                        data-room-id="<?php echo $room['id']; ?>"
+                                        data-price="<?php echo $room['price']; ?>">Book Now</a>
                                 <?php else: ?>
                                     <button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">Unavailable</button>
                                 <?php endif; ?>
@@ -1645,10 +1663,13 @@ if ($menu_query) {
     </footer>
 
     <!-- Booking Modal -->
-    <div id="booking-modal" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
-        <div style="background: #fff; width: 100%; max-width: 600px; border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
-            
-            <button id="close-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
+    <div id="booking-modal"
+        style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
+        <div
+            style="background: #fff; width: 100%; max-width: 600px; border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+
+            <button id="close-modal"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
                 <i class="fas fa-times"></i>
             </button>
 
@@ -1661,20 +1682,25 @@ if ($menu_query) {
                 <input type="hidden" name="room_id" id="form-room-id">
                 <input type="hidden" name="price" id="form-price">
 
-                <div style="background: #f5f5dc; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #c19a53;">
+                <div
+                    style="background: #f5f5dc; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #c19a53;">
                     <p style="color: #666; font-size: 0.9rem; margin: 0;">Selected Room</p>
                     <h3 id="modal-room-name" style="color: #c19a53; margin: 5px 0; font-size: 1.3rem;">Room Name</h3>
                     <p id="modal-room-price" style="color: #8b7355; font-weight: 600; margin: 5px 0;">$0 / night</p>
                 </div>
 
                 <div style="margin-bottom: 18px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-in Date</label>
-                    <input type="date" name="checkin" id="checkin" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-in
+                        Date</label>
+                    <input type="date" name="checkin" id="checkin" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
                 </div>
 
                 <div style="margin-bottom: 18px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-in Time</label>
-                    <select name="checkin_time" id="checkin_time" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-in
+                        Time</label>
+                    <select name="checkin_time" id="checkin_time" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
                         <option value="">Select time</option>
                         <option value="14:00">2:00 PM</option>
                         <option value="15:00">3:00 PM</option>
@@ -1686,13 +1712,17 @@ if ($menu_query) {
                 </div>
 
                 <div style="margin-bottom: 18px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-out Date</label>
-                    <input type="date" name="checkout" id="checkout" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-out
+                        Date</label>
+                    <input type="date" name="checkout" id="checkout" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
                 </div>
 
                 <div style="margin-bottom: 18px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-out Time</label>
-                    <select name="checkout_time" id="checkout_time" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Check-out
+                        Time</label>
+                    <select name="checkout_time" id="checkout_time" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
                         <option value="">Select time</option>
                         <option value="10:00">10:00 AM</option>
                         <option value="11:00">11:00 AM</option>
@@ -1702,17 +1732,23 @@ if ($menu_query) {
                 </div>
 
                 <div style="margin-bottom: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Number of Guests</label>
-                    <input type="number" name="guests" id="guests" value="2" min="1" max="4" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Number of
+                        Guests</label>
+                    <input type="number" name="guests" id="guests" value="2" min="1" max="4" required
+                        style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; box-sizing: border-box;">
                 </div>
 
-                <div id="booking-message" style="margin-bottom: 20px; padding: 12px; border-radius: 6px; display: none; font-weight: 500;"></div>
+                <div id="booking-message"
+                    style="margin-bottom: 20px; padding: 12px; border-radius: 6px; display: none; font-weight: 500;">
+                </div>
 
                 <div style="display: flex; gap: 10px; margin-top: 25px;">
-                    <button type="submit" style="flex: 1; padding: 14px; background: #c19a53; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
+                    <button type="submit"
+                        style="flex: 1; padding: 14px; background: #c19a53; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
                         Confirm Reservation
                     </button>
-                    <button type="button" id="cancel-modal" style="flex: 1; padding: 14px; background: #f5f5dc; color: #c19a53; border: 2px solid #c19a53; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
+                    <button type="button" id="cancel-modal"
+                        style="flex: 1; padding: 14px; background: #f5f5dc; color: #c19a53; border: 2px solid #c19a53; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
                         Cancel
                     </button>
                 </div>
@@ -1721,23 +1757,34 @@ if ($menu_query) {
     </div>
 
     <!-- Food Menu Modal -->
-    <div id="food-modal" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2001; align-items: center; justify-content: center; padding: 20px;">
-        <div style="background: #fff; width: 100%; max-width: 700px; border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
-            
-            <button id="close-food-modal" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
+    <div id="food-modal"
+        style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2001; align-items: center; justify-content: center; padding: 20px;">
+        <div
+            style="background: #fff; width: 100%; max-width: 700px; border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
+
+            <button id="close-food-modal"
+                style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
                 <i class="fas fa-times"></i>
             </button>
 
             <h2 style="color: #c19a53; margin-bottom: 10px; font-size: 1.8rem;">Order Food & Beverages</h2>
             <p style="color: #666; margin-bottom: 25px;">Add items to your reservation</p>
 
-            <div id="menu-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+            <div id="menu-container"
+                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
                 <?php foreach ($menu_items as $item): ?>
-                    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.3s;" class="menu-item" data-id="<?php echo $item['id']; ?>" data-name="<?php echo htmlspecialchars($item['name']); ?>" data-price="<?php echo $item['price']; ?>">
-                        <h4 style="color: #c19a53; margin-bottom: 8px; font-size: 0.95rem;"><?php echo htmlspecialchars($item['name']); ?></h4>
-                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 10px;"><?php echo htmlspecialchars($item['description'] ?? ''); ?></p>
-                        <p style="color: #8b7355; font-weight: 600; font-size: 1.1rem;">$<?php echo number_format($item['price'], 2); ?></p>
-                        <button type="button" class="add-to-order" style="width: 100%; padding: 8px; background: #c19a53; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">
+                    <div style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; text-align: center; cursor: pointer; transition: all 0.3s;"
+                        class="menu-item" data-id="<?php echo $item['id']; ?>"
+                        data-name="<?php echo htmlspecialchars($item['name']); ?>"
+                        data-price="<?php echo $item['price']; ?>">
+                        <h4 style="color: #c19a53; margin-bottom: 8px; font-size: 0.95rem;">
+                            <?php echo htmlspecialchars($item['name']); ?></h4>
+                        <p style="color: #666; font-size: 0.85rem; margin-bottom: 10px;">
+                            <?php echo htmlspecialchars($item['description'] ?? ''); ?></p>
+                        <p style="color: #8b7355; font-weight: 600; font-size: 1.1rem;">
+                            $<?php echo number_format($item['price'], 2); ?></p>
+                        <button type="button" class="add-to-order"
+                            style="width: 100%; padding: 8px; background: #c19a53; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">
                             + Add
                         </button>
                     </div>
@@ -1747,17 +1794,21 @@ if ($menu_query) {
             <div style="background: #f5f5dc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                 <h3 style="color: #c19a53; margin-bottom: 15px;">Your Order</h3>
                 <div id="order-items-list" style="margin-bottom: 15px;"></div>
-                <div style="border-top: 2px solid #ddd; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="border-top: 2px solid #ddd; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <h3 style="color: #333; margin: 0;">Order Total:</h3>
-                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">$<span id="order-total">0.00</span></p>
+                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">$<span
+                            id="order-total">0.00</span></p>
                 </div>
             </div>
 
             <div style="display: flex; gap: 10px;">
-                <button type="button" id="confirm-food-order" style="flex: 1; padding: 14px; background: #c19a53; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
+                <button type="button" id="confirm-food-order"
+                    style="flex: 1; padding: 14px; background: #c19a53; color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
                     Add to Reservation
                 </button>
-                <button type="button" id="close-food-btn" style="flex: 1; padding: 14px; background: #f5f5dc; color: #c19a53; border: 2px solid #c19a53; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
+                <button type="button" id="close-food-btn"
+                    style="flex: 1; padding: 14px; background: #f5f5dc; color: #c19a53; border: 2px solid #c19a53; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; text-transform: uppercase;">
                     Cancel
                 </button>
             </div>
@@ -1929,7 +1980,7 @@ if ($menu_query) {
         });
 
         // Booking Modal Handler
-        (function() {
+        (function () {
             const modal = document.getElementById('booking-modal');
             const closeBtn = document.getElementById('close-modal');
             const cancelBtn = document.getElementById('cancel-modal');
@@ -1946,18 +1997,18 @@ if ($menu_query) {
                     const roomName = btn.getAttribute('data-room');
                     const roomId = btn.getAttribute('data-room-id');
                     const price = btn.getAttribute('data-price');
-                    
+
                     document.getElementById('modal-room-name').textContent = roomName;
                     document.getElementById('modal-room-price').textContent = '$' + parseFloat(price).toFixed(2) + ' / night';
                     document.getElementById('form-room-name').value = roomName;
                     document.getElementById('form-room-id').value = roomId;
                     document.getElementById('form-price').value = price;
-                    
+
                     // Set min date to today
                     const today = new Date().toISOString().split('T')[0];
                     checkinInput.min = today;
                     checkoutInput.min = today;
-                    
+
                     bookingMessage.style.display = 'none';
                     modal.style.display = 'flex';
                 });
@@ -1982,7 +2033,7 @@ if ($menu_query) {
             bookingForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 bookingMessage.style.display = 'none';
-                
+
                 const formData = new FormData(bookingForm);
 
                 try {
@@ -1992,8 +2043,8 @@ if ($menu_query) {
                         credentials: 'same-origin'
                     });
                     const data = await res.json();
-                    
-                    if (res.status ===  200 && data.success) {
+
+                    if (res.status === 200 && data.success) {
                         bookingMessage.style.display = 'block';
                         bookingMessage.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
                         bookingMessage.style.color = '#10b981';
@@ -2104,7 +2155,8 @@ if ($menu_query) {
     </script>
 </body>
 
-</html>    </script>
+</html>
+</script>
 </body>
 
 </html>
