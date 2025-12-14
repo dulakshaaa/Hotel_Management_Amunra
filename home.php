@@ -1394,6 +1394,129 @@ if ($menu_query) {
             </div>
         </div>
     </section>
+    
+    <!-- Restaurant Section -->
+<section id="restaurants">
+    <div class="container">
+        <div class="section-title">
+            <h2>Signature Dining Experiences</h2>
+            <p>Savor world-class cuisine inspired by Egyptian heritage and global flavors</p>
+        </div>
+
+        <div class="rooms-grid">
+
+            <!-- Restaurant 1 -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="images/img1.jpg"
+                         alt="Pharaoh’s Feast">
+                </div>
+
+                <div class="room-info">
+                    <h3>Pharaoh’s Feast</h3>
+
+                    <div class="room-availability availability-available">
+                        <i class="fas fa-check-circle"></i> Open Now
+                    </div>
+
+                    <div class="room-price">
+                        $$$ <span> · Fine Dining</span>
+                    </div>
+
+                    <p>
+                        An opulent fine-dining restaurant serving authentic cuisine with a modern twist.
+                    </p>
+
+                    <div class="room-features">
+                        <span class="room-feature">Egyptian Cuisine</span>
+                        <span class="room-feature">Live Music</span>
+                        
+                    </div>
+
+                    <div class="room-actions">
+                        <a href="#" class="btn">View Menu</a>
+                        <a href="#" class="btn btn-outline">Reserve Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 2 -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="images/img2.jpg"
+                         alt="Nile Breeze Café">
+                </div>
+
+                <div class="room-info">
+                    <h3>Nile Breeze Café</h3>
+
+                    <div class="room-availability availability-available">
+                        <i class="fas fa-check-circle"></i> Open Now
+                    </div>
+
+                    <div class="room-price">
+                        $$ <span> · Café & Lounge</span>
+                    </div>
+
+                    <p>
+                        A relaxed café overlooking the gardens, perfect for fresh coffee, juices, and light meals.
+                    </p>
+
+                    <div class="room-features">
+                        <span class="room-feature">Fresh Coffee</span>
+                        <span class="room-feature">Outdoor Seating</span>
+                        <span class="room-feature">Free Wi-Fi</span>
+                    </div>
+
+                    <div class="room-actions">
+                        <a href="#" class="btn">View Menu</a>
+                        <a href="#" class="btn btn-outline">Reserve Table</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restaurant 3 (Closed) -->
+            <div class="room-card">
+                <div class="room-image">
+                    <img src="images/img3.jpg"
+                         alt="Golden Pyramid Grill">
+
+                    
+                </div>
+
+                <div class="room-info">
+                    <h3>Golden Pyramid Grill</h3>
+
+                    <div class="room-availability availability-unavailable">
+                        <i class="fas fa-times-circle"></i> Currently Closed
+                    </div>
+
+                    <div class="room-price">
+                        $$$ <span> · International Buffet</span>
+                    </div>
+
+                    <p>
+                        A lavish buffet offering international flavors, live cooking stations, and family dining.
+                    </p>
+
+                    <div class="room-features">
+                        <span class="room-feature">Buffet</span>
+                        <span class="room-feature">Live Cooking</span>
+                        <span class="room-feature">Family Friendly</span>
+                    </div>
+
+                    <div class="room-actions">
+                        <a href="#" class="btn">View Menu</a>
+                        <button class="btn" >
+                            Not Available
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <!-- Amenities Section -->
     <section id="amenities">

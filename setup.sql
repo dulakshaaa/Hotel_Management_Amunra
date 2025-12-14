@@ -106,3 +106,43 @@ INSERT INTO menu (name, description, price, category, image_url) VALUES
 ('Koshari', 'Egyptian pasta with lentils and chickpeas', 14.99, 'main', 'https://images.unsplash.com/photo-1585238341710-4913d3a3a48f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'),
 ('Fresh Orange Juice', 'Freshly squeezed', 5.99, 'beverages', 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'),
 ('Premium Egyptian Wine', 'Red wine from local vineyards', 24.99, 'beverages', 'https://images.unsplash.com/photo-1510812431401-41d2cab2707d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60');
+
+
+-- Create restaurants table
+CREATE TABLE restaurants (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    image_url VARCHAR(500),
+    description TEXT,
+    price_range VARCHAR(10),
+    open BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create restaurant_features table (for storing features/amenities)
+CREATE TABLE restaurant_features (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    restaurant_id INT NOT NULL,
+    feature VARCHAR(100) NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants(id) ON DELETE CASCADE
+);
+
+-- Insert sample restaurants
+INSERT INTO restaurants (name, type, image_url, description, price_range, open) VALUES
+('Pharaoh\'s Feast', 'Fine Dining', 'https://cdn.pixabay.com/photo/2017/08/07/08/56/restaurant-2607129_1280.jpg', 'Luxury Egyptian fine dining experience.', '$$$', TRUE),
+('Nile Breeze Café', 'Cafe', 'https://cdn.pixabay.com/photo/2016/11/18/14/05/cafe-1836415_1280.jpg', 'Relaxed café with drinks and light meals.', '$$', TRUE),
+('Golden Pyramid Grill', 'Buffet', 'https://cdn.pixabay.com/photo/2016/11/29/12/54/buffet-1866499_1280.jpg', 'International buffet experience.', '$$$', FALSE);
+
+-- Insert restaurant features
+INSERT INTO restaurant_features (restaurant_id, feature) VALUES
+(1, 'Fine Dining'),
+(1, 'Live Music'),
+(1, 'Elegant Interior'),
+(2, 'Coffee'),
+(2, 'Outdoor Seating'),
+(2, 'Wi-Fi'),
+(3, 'Buffet'),
+(3, 'Family Friendly'),
+(3, 'Live Cooking');
