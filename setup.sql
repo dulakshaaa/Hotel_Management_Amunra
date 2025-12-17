@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2025 at 07:01 PM
+-- Generation Time: Dec 17, 2025 at 08:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -68,14 +68,6 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `reservation_id`, `user_id`, `total_amount`, `status`, `created_at`) VALUES
-(15, 10, 1, 7.99, 'completed', '2025-11-24 05:49:39'),
-(17, 14, 1, 50.98, 'cancelled', '2025-12-01 13:56:49');
-
 -- --------------------------------------------------------
 
 --
@@ -91,15 +83,6 @@ CREATE TABLE `order_items` (
   `subtotal` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `menu_item_id`, `quantity`, `price`, `subtotal`, `created_at`) VALUES
-(14, 15, 17, 1, 7.99, 7.99, '2025-11-24 05:49:39'),
-(16, 17, 14, 1, 35.99, 35.99, '2025-12-01 13:56:49'),
-(17, 17, 18, 1, 14.99, 14.99, '2025-12-01 13:56:49');
 
 -- --------------------------------------------------------
 
@@ -125,10 +108,7 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `user_id`, `room_name`, `price`, `checkin`, `checkout`, `checkin_time`, `checkout_time`, `guests`, `created_at`) VALUES
-(10, 1, 'Aphrodite Suites', 299.00, '2025-11-26', '2025-11-29', '16:00:00', '11:00:00', 2, '2025-11-24 05:25:16'),
-(13, 1, 'Aphrodite Suites', 299.00, '2025-11-25', '2025-11-28', '16:00:00', '11:00:00', 2, '2025-11-24 16:46:54'),
-(14, 1, 'Aphrodite Suites', 299.00, '2025-12-11', '2026-01-03', '15:00:00', '12:00:00', 2, '2025-12-01 13:55:11'),
-(15, 1, 'Hermes Chambers', 199.00, '2025-12-18', '2026-01-10', '16:00:00', '12:00:00', 2, '2025-12-14 15:25:09');
+(19, 1, 'Ra-Apollo Penthouse', 500000.00, '2025-12-20', '2025-12-21', '17:00:00', '12:00:00', 2, '2025-12-17 18:47:14');
 
 -- --------------------------------------------------------
 
@@ -209,10 +189,13 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`, `category`, `price`, `description`, `image_url`, `features`, `total_rooms`, `available_rooms`, `created_at`) VALUES
-(1, 'Hermes Chambers', 'standard', 199.00, 'Enjoy stunning views of the Nile River from your private balcony in our elegantly appointed standard room.', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"King Bed\", \"River View\", \"Free WiFi\"]', 8, 7, '2025-11-24 03:26:07'),
-(2, 'Aphrodite Suites', 'deluxe', 299.00, 'Experience royal comfort in our spacious deluxe room featuring Egyptian-inspired decor and premium amenities.', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"King Bed\", \"Sitting Area\", \"Luxury Bath\"]', 6, 3, '2025-11-24 03:26:07'),
-(3, 'Zues\' Throne', 'suite', 499.00, 'Live like Egyptian royalty in our expansive suite with separate living area, dining space, and panoramic Nile views.', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"Separate Living Room\", \"Dining Area\"]', 4, 4, '2025-11-24 03:26:07'),
-(4, 'Ra-Apollo Penthouse', 'suite', 499.00, 'Live like Egyptian royalty in our expansive suite with separate living area, dining space, and panoramic Nile views.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Wf8WxRdfCGXG6TLperpYJkaMtf0VnX03TQ&s', '[\"Separate Living Room\", \"Dining Area\"]', 3, 3, '2025-11-24 03:26:07');
+(1, 'Hermes Chambers(City View)', 'standard', 45000.00, 'Enjoy stunning views of the Nile River from your private balcony in our elegantly appointed standard room.', 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"King Bed\", \"River View\", \"Free WiFi\"]', 8, 8, '2025-11-24 03:26:07'),
+(2, 'Aphrodite Suites', 'deluxe', 80000.00, 'Experience royal comfort in our spacious deluxe room featuring Egyptian-inspired decor and premium amenities.', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"King Bed\", \"Sitting Area\", \"Luxury Bath\"]', 6, 9, '2025-11-24 03:26:07'),
+(3, 'Zues\' Throne', 'suite', 250000.00, 'Live like Egyptian royalty in our expansive suite with separate living area, dining space, and panoramic Nile views.', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80', '[\"Separate Living Room\", \"Dining Area\"]', 4, 4, '2025-11-24 03:26:07'),
+(4, 'Ra-Apollo Penthouse', 'suite', 500000.00, 'Live like Egyptian royalty in our expansive suite with separate living area, dining space, and panoramic Nile views.', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Wf8WxRdfCGXG6TLperpYJkaMtf0VnX03TQ&s', '[\"Separate Living Room\", \"Dining Area\"]', 3, 2, '2025-11-24 03:26:07'),
+(7, 'Hermes Chambers(Sea View)', 'standard', 55000.00, 'Experience royal comfort in our spacious deluxe room featuring Egyptian-inspired decor and premium amenities.', 'images/img5.jpg', '[]', 10, 10, '2025-12-17 18:23:21'),
+(8, 'Hermes Chambers(Interconnecting)', 'standard', 90000.00, 'Enjoy stunning views of the Nile River from your private balcony in our elegantly appointed standard room.', 'images/img6.jpg', '[]', 8, 8, '2025-12-17 18:33:33'),
+(9, 'Aphrodite Suites(Interconnecting)', 'deluxe', 160000.00, 'Experience royal comfort in our spacious deluxe room featuring Egyptian-inspired decor and premium amenities.', 'images/img7.jpg', '[]', 6, 6, '2025-12-17 18:34:33');
 
 -- --------------------------------------------------------
 
@@ -238,7 +221,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `fullname`, `contact_number`, `nic`) VALUES
 (1, 'demo', 'demo@example.com', '$2y$10$/fjHS5C90YxOukXucJpA3u7ENV9j/KEW3zpLTAj9T8PZJOPWB5RgW', '2025-11-24 02:01:54', NULL, NULL, NULL),
 (2, 'dula', 'dulaksharajapaksha4@gmail.com', '$2y$10$yHRYhbrKyAQXVvgXsFmcGucnzzHoUNj988aEQAkY8XzfNSh4vVlfq', '2025-11-24 02:13:36', NULL, NULL, NULL),
-(4, 'dulaksha', 'dulaksharajapaksha@gmail.com', '$2y$10$wFtdGuRjF/oUFeeJC1MCwOo99OfJDCM2KkG/Pq40819mtq/hW6RWq', '2025-12-17 17:29:57', 'Dulaksha Rajapaksha', '0774193618', '200286799546');
+(4, 'dulaksha', 'dulaksharajapaksha@gmail.com', '$2y$10$wFtdGuRjF/oUFeeJC1MCwOo99OfJDCM2KkG/Pq40819mtq/hW6RWq', '2025-12-17 17:29:57', 'Dulaksha Rajapaksha', '0774193618', '200286799546'),
+(5, 'timasha', 'timasha@gmail.coom', '$2y$10$kD6EfD1KKnHR/lIo8.o4eubLlmZWhvdrbaP9OxLkjGGQ7m9wdjC12', '2025-12-17 18:11:29', 'Thimasha Panchali', '0778654321', '200236478895'),
+(6, 'test', 'test@gmail.com', '$2y$10$lnaSM3m1l0H8Tc1gs9yq1eKDl4NUiD6lso2d3hUyWDL0JRduVbDtW', '2025-12-17 18:55:12', 'test 123', '0774193618', '200286799546'),
+(7, 'test2', 'test3@gmail.com', '$2y$10$iaR2LPVd1.5KYD/uwdzuTeR4kim4ueIbkh8OILOV2CSPshGI9wJle', '2025-12-17 18:56:49', 'test234', '0774193618', '200286799546');
 
 --
 -- Indexes for dumped tables
@@ -314,19 +300,19 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -344,13 +330,13 @@ ALTER TABLE `restaurant_features`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
