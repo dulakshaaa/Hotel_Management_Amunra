@@ -11,7 +11,7 @@ $message = '';
 $error = '';
 
 // Fetch user details
-$userStmt = $conn->prepare("SELECT username, email FROM users WHERE id = ?");
+$userStmt = $conn->prepare("SELECT username, email, fullname, contact_number, nic FROM users WHERE id = ?");
 $userStmt->bind_param('i', $user_id);
 $userStmt->execute();
 $user = $userStmt->get_result()->fetch_assoc();
@@ -20,13 +20,18 @@ $userStmt->close();
 // Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
+    $fullname = trim($_POST['fullname'] ?? '');
+    $contact_number = trim($_POST['contact_number'] ?? '');
+    $nic = trim($_POST['nic'] ?? '');
     $password = $_POST['password'] ?? '';
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Invalid email address';
+    } else if (empty($fullname) || empty($contact_number) || empty($nic)) {
+        $error = 'All fields are required';
     } else {
-        $update = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $update->bind_param('si', $email, $user_id);
+        $update = $conn->prepare("UPDATE users SET email = ?, fullname = ?, contact_number = ?, nic = ? WHERE id = ?");
+        $update->bind_param('ssssi', $email, $fullname, $contact_number, $nic, $user_id);
         $update->execute();
         $update->close();
 
@@ -305,6 +310,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <h3><?php echo htmlspecialchars($user['username']); ?></h3>
                 <p><?php echo htmlspecialchars($user['email']); ?></p>
+                <?php if (!empty($user['fullname'])): ?>
+                    <p style="font-size: 0.85rem; color: #999;"><?php echo htmlspecialchars($user['fullname']); ?></p>
+                <?php endif; ?>
                 
                 <ul class="sidebar-menu">
                     <li><a href="#personal" class="menu-link active">Personal Info</a></li>
@@ -338,8 +346,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" name="fullname" value="<?php echo htmlspecialchars($user['fullname'] ?? ''); ?>" required>
+                        </div>
+
+                        <div class="form-group">
                             <label>Email Address</label>
                             <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" name="contact_number" value="<?php echo htmlspecialchars($user['contact_number'] ?? ''); ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>NIC (National ID Card)</label>
+                            <input type="text" name="nic" value="<?php echo htmlspecialchars($user['nic'] ?? ''); ?>" required>
                         </div>
 
                         <button type="submit" class="btn">Update Profile</button>

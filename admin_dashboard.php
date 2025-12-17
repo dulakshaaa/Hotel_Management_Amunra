@@ -314,7 +314,7 @@ html,body{height:100%;margin:0;font-family:"Inter",system-ui,Segoe UI,Roboto,Ari
           <h3>Users</h3>
           <div class="controls"><button class="btn-ghost" onclick="loadUsers()">Refresh</button></div>
         </div>
-        <table class="table" id="users-table"><thead><tr><th>User</th><th>Email</th><th>Joined</th></tr></thead><tbody></tbody></table>
+        <table class="table" id="users-table"><thead><tr><th>Username</th><th>Full Name</th><th>Email</th><th>Contact Number</th><th>NIC</th><th>Joined</th></tr></thead><tbody></tbody></table>
       </section>
 
       <!-- Reviews -->
@@ -410,7 +410,7 @@ async function loadOverviewDetails(){
   document.getElementById('kpi-orders').textContent = (orders.filter(o=>o.status==='pending')||[]).length;
   const totalRevenue = orders.reduce((s,o)=>s + (parseFloat(o.total_amount)||0), 0)
                     + bookings.reduce((s,b)=>s + (parseFloat(b.price)||0), 0); // rough
-  document.getElementById('kpi-revenue').textContent = '$' + Math.round(totalRevenue);
+  document.getElementById('kpi-revenue').textContent = 'LKR ' + Math.round(totalRevenue);
   document.getElementById('kpi-bookings-sub').textContent = `${users.length} users • ${reviews.length} reviews`;
 
   // Occupancy: simple occupancy = (reserved nights / (total_rooms * days range)) for last 30 days
@@ -505,14 +505,14 @@ async function loadOverviewDetails(){
   const topRooms = Object.keys(roomRevenue).map(name=>({name, revenue:roomRevenue[name]})).sort((a,b)=>b.revenue-a.revenue).slice(0,6);
   const topRoomsEl = document.getElementById('top-rooms'); topRoomsEl.innerHTML = '';
   topRooms.forEach(tr=> {
-    const div = document.createElement('div'); div.style.display='flex'; div.style.justifyContent='space-between'; div.style.padding='6px 0'; div.innerHTML = `<div style="font-weight:600">${escapeHtml(tr.name)}</div><div style="color:#8b7355;font-weight:700">$${(tr.revenue||0).toFixed(2)}</div>`;
+    const div = document.createElement('div'); div.style.display='flex'; div.style.justifyContent='space-between'; div.style.padding='6px 0'; div.innerHTML = `<div style="font-weight:600">${escapeHtml(tr.name)}</div><div style="color:#8b7355;font-weight:700">LKR ${(tr.revenue||0).toFixed(2)}</div>`;
     topRoomsEl.appendChild(div);
   });
 
   // Activity log: combine bookings (new), orders (new), reviews, users (signup)
   const activities = [];
   bookings.slice().reverse().slice(0,50).forEach(b=> activities.push({when: b.created_at || b.checkin, type:'booking', text:`Booking by ${b.username} — ${b.room_name} (${b.checkin}→${b.checkout})`}));
-  orders.slice().reverse().slice(0,50).forEach(o=> activities.push({when: o.created_at, type:'order', text:`Order #${o.id} by ${o.username} — $${parseFloat(o.total_amount).toFixed(2)}`}));
+  orders.slice().reverse().slice(0,50).forEach(o=> activities.push({when: o.created_at, type:'order', text:`Order #${o.id} by ${o.username} — LKR ${parseFloat(o.total_amount).toFixed(2)}`}));
   reviews.slice().reverse().slice(0,50).forEach(r=> activities.push({when: r.created_at, type:'review', text:`Review by ${r.username} — ${r.title}`}));
   users.slice().reverse().slice(0,50).forEach(u=> activities.push({when: u.created_at, type:'signup', text:`User signup: ${u.username}`}));
   activities.sort((a,b)=> new Date(b.when) - new Date(a.when));
@@ -541,7 +541,7 @@ async function loadRooms(){
   // build simple table with quick edit
   let html = '<table class="table"><thead><tr><th>Room</th><th>Category</th><th>Price</th><th>Available</th><th>Actions</th></tr></thead><tbody>';
   res.rooms.forEach(r=>{
-    html += `<tr><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.category)}</td><td>$${parseFloat(r.price).toFixed(2)}</td><td>${r.available_rooms}/${r.total_rooms}</td>
+    html += `<tr><td>${escapeHtml(r.name)}</td><td>${escapeHtml(r.category)}</td><td>LKR ${parseFloat(r.price).toFixed(2)}</td><td>${r.available_rooms}/${r.total_rooms}</td>
       <td><button class="btn-edit" onclick="editRoom(${r.id})">Edit</button> <button class="btn-delete" onclick="deleteRoom(${r.id})">Delete</button></td></tr>`;
   });
   html += '</tbody></table>';
@@ -573,7 +573,7 @@ async function loadMenu(){
   if(!res.menu || !res.menu.length){ wrap.innerHTML = '<div class="small">No menu items</div>'; return; }
   let html = '<table class="table"><thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Available</th><th>Actions</th></tr></thead><tbody>';
   res.menu.forEach(m=>{
-    html += `<tr><td>${escapeHtml(m.name)}</td><td>${escapeHtml(m.category)}</td><td>$${parseFloat(m.price).toFixed(2)}</td><td>${m.available? 'Yes':'No'}</td><td><button class="btn-edit" onclick="editMenu(${m.id})">Edit</button> <button class="btn-delete" onclick="deleteMenu(${m.id})">Delete</button></td></tr>`;
+    html += `<tr><td>${escapeHtml(m.name)}</td><td>${escapeHtml(m.category)}</td><td>LKR ${parseFloat(m.price).toFixed(2)}</td><td>${m.available? 'Yes':'No'}</td><td><button class="btn-edit" onclick="editMenu(${m.id})">Edit</button> <button class="btn-delete" onclick="deleteMenu(${m.id})">Delete</button></td></tr>`;
   });
   html += '</tbody></table>'; wrap.innerHTML = html;
 }
@@ -601,11 +601,11 @@ async function loadBookings(){
 async function cancelBooking(id){ if(!confirm('Cancel reservation?')) return; const res = await apiPost('cancel_booking',{reservation_id:id}); if(res.success){ loadBookings(); loadRooms(); toast('Reservation cancelled'); } else alert(res.message||'Error'); }
 
 // ORDERS
-async function loadOrders(){ const res = await apiGet('list_orders'); const tbody = document.querySelector('#orders-table tbody'); tbody.innerHTML=''; (res.orders||[]).forEach(o=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${o.id}</td><td>${escapeHtml(o.username)}</td><td>${escapeHtml(o.room_name)}</td><td>$${parseFloat(o.total_amount).toFixed(2)}</td><td>${o.status}</td><td><select onchange="changeOrderStatus(${o.id}, this.value)"><option ${o.status=='pending'?'selected':''}>pending</option><option ${o.status=='confirmed'?'selected':''}>confirmed</option><option ${o.status=='completed'?'selected':''}>completed</option><option ${o.status=='cancelled'?'selected':''}>cancelled</option></select></td>`; tbody.appendChild(tr); }); }
+async function loadOrders(){ const res = await apiGet('list_orders'); const tbody = document.querySelector('#orders-table tbody'); tbody.innerHTML=''; (res.orders||[]).forEach(o=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${o.id}</td><td>${escapeHtml(o.username)}</td><td>${escapeHtml(o.room_name)}</td><td>LKR ${parseFloat(o.total_amount).toFixed(2)}</td><td>${o.status}</td><td><select onchange="changeOrderStatus(${o.id}, this.value)"><option ${o.status=='pending'?'selected':''}>pending</option><option ${o.status=='confirmed'?'selected':''}>confirmed</option><option ${o.status=='completed'?'selected':''}>completed</option><option ${o.status=='cancelled'?'selected':''}>cancelled</option></select></td>`; tbody.appendChild(tr); }); }
 async function changeOrderStatus(orderId,status){ const res = await apiPost('update_order_status',{order_id:orderId,status}); if(res.success) loadOrders(); else alert(res.message||'Error'); }
 
 // USERS & REVIEWS
-async function loadUsers(){ const res = await apiGet('list_users'); const tbody = document.querySelector('#users-table tbody'); tbody.innerHTML=''; (res.users||[]).forEach(u=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${escapeHtml(u.username)}</td><td>${escapeHtml(u.email)}</td><td>${u.created_at}</td>`; tbody.appendChild(tr); }); }
+async function loadUsers(){ const res = await apiGet('list_users'); const tbody = document.querySelector('#users-table tbody'); tbody.innerHTML=''; (res.users||[]).forEach(u=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${escapeHtml(u.username)}</td><td>${escapeHtml(u.fullname||'N/A')}</td><td>${escapeHtml(u.email)}</td><td>${escapeHtml(u.contact_number||'N/A')}</td><td>${escapeHtml(u.nic||'N/A')}</td><td>${u.created_at}</td>`; tbody.appendChild(tr); }); }
 async function loadReviews(){ const res = await apiGet('list_reviews'); const wrap = document.getElementById('reviews-container'); wrap.innerHTML=''; (res.reviews||[]).forEach(rv=>{ const div=document.createElement('div'); div.className='item'; div.innerHTML=`<div style="flex:1"><strong>${escapeHtml(rv.username)}</strong><div class="meta">${escapeHtml(rv.title)} • ${rv.rating}★</div><div style="margin-top:6px">${escapeHtml(rv.comment)}</div></div><div><button class="btn-delete" onclick="deleteReview(${rv.id})">Delete</button></div>`; wrap.appendChild(div); }); }
 async function deleteReview(id){ if(!confirm('Delete review?')) return; const res = await apiPost('delete_review',{id}); if(res.success) loadReviews(); else alert(res.message||'Error'); }
 

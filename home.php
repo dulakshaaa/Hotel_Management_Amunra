@@ -1165,34 +1165,34 @@ if ($menu_query) {
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <ul>
-                <!-- User Menu (Logged In) -->
-                <?php if (!empty($_SESSION['user_id'])): ?>
-                    <li class="user-dropdown">
-                        <a href="javascript:void(0)" class="user-name" aria-haspopup="true" aria-expanded="false">
-                            <?php echo htmlspecialchars($_SESSION['username'] ?? 'Guest', ENT_QUOTES, 'UTF-8'); ?>
-                            <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 6px;"></i>
-                        </a>
+                    <!-- User Menu (Logged In) -->
+                    <?php if (!empty($_SESSION['user_id'])): ?>
+                        <li class="user-dropdown">
+                            <a href="javascript:void(0)" class="user-name" aria-haspopup="true" aria-expanded="false">
+                                <?php echo htmlspecialchars($_SESSION['username'] ?? 'Guest', ENT_QUOTES, 'UTF-8'); ?>
+                                <i class="fas fa-chevron-down" style="font-size: 0.8rem; margin-left: 6px;"></i>
+                            </a>
 
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="profile.php" role="menuitem">My Profile</a></li>
-                            <li><a href="bookings.php" role="menuitem">My Bookings</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a href="logout.php" role="menuitem" class="logout-link">
-                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                </a></li>
-                        </ul>
-                    </li>
-                <?php else: ?>
-                    <!-- Guest Links -->
-                    <li class="auth-links">
-                        <a href="login.php" class="btn-login">Login</a>
-                    </li>
-                    <li>
-                        <a href="register.php" class="btn-register">Register</a>
-                    </li>
-                <?php endif; ?>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="profile.php" role="menuitem">My Profile</a></li>
+                                <li><a href="bookings.php" role="menuitem">My Bookings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="logout.php" role="menuitem" class="logout-link">
+                                        <i class="fas fa-sign-out-alt"></i> Logout
+                                    </a></li>
+                            </ul>
+                        </li>
+                    <?php else: ?>
+                        <!-- Guest Links -->
+                        <li class="auth-links">
+                            <a href="login.php" class="btn-login">Login</a>
+                        </li>
+                        <li>
+                            <a href="register.php" class="btn-register">Register</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <!-- Mobile Menu Toggle -->
@@ -1225,8 +1225,8 @@ if ($menu_query) {
         <div class="container">
             <div class="hero-content">
                 <h1>Experience <span>Egyptian</span> Luxury</h1>
-                <p>Welcome to AMUNRA, where ancient Egyptian elegance meets modern luxury. Immerse yourself in the
-                    timeless beauty of the Nile while enjoying world-class amenities and impeccable service.</p>
+                <p>where Egyptian elegance meets Greek divine grandeur. Experience the mystique of the Nile, the glory
+                    of Olympus, and the finest in modern luxury.</p>
                 <div class="btn-group">
                     <a href="#rooms" class="btn">View Rooms</a>
 
@@ -1245,12 +1245,18 @@ if ($menu_query) {
             <div class="about-content">
                 <div class="about-text">
                     <h3>A Sanctuary of Luxury</h3>
-                    <p>AMUNRA is more than just a hotel - it's an experience that transports you to the golden age
-                        of Egyptian royalty. Our resort combines authentic Egyptian architecture with modern comforts to
-                        create a truly unique stay.</p>
-                    <p>Located on the banks of the legendary Nile River, our property offers breathtaking views and
-                        access to some of Egypt's most iconic landmarks. Every detail has been carefully crafted to
-                        reflect the rich heritage and timeless elegance of ancient Egypt.</p>
+                    <p>Hotel Amunra is more than a luxury escape—it is the awakening of a legendary world where Greek
+                        grandeur and Egyptian mystique converge in perfect harmony. Rising with timeless elegance,
+                        Amunra stands as a living tribute to gods, pharaohs, and ancient artistry reimagined for the
+                        modern traveller.
+
+                        Within its walls, every corridor tells a story and every experience is crafted to enchant. From
+                        divine dining rituals and immersive cultural journeys to indulgent suites inspired by myth and
+                        royalty, Amunra invites you to step into a universe where history becomes immersive luxury.
+
+                        Welcome to Amunra—where myth becomes reality, and every moment feels eternal.
+                    </p>
+                    
                     <div class="about-features">
                         <div class="feature-item">
                             <div class="feature-icon">
@@ -1369,7 +1375,7 @@ if ($menu_query) {
                                     <i class="fas fa-times-circle"></i> No Rooms Available
                                 <?php endif; ?>
                             </div>
-                            <div class="room-price">$<?php echo number_format($room['price'], 2); ?> <span>/ night</span>
+                            <div class="room-price">LKR <?php echo number_format($room['price'], 2); ?> <span>/ night</span>
                             </div>
                             <p><?php echo htmlspecialchars($room['description']); ?></p>
                             <div class="room-features">
@@ -1394,129 +1400,158 @@ if ($menu_query) {
             </div>
         </div>
     </section>
-    
+
     <!-- Restaurant Section -->
-<section id="restaurants">
-    <div class="container">
-        <div class="section-title">
-            <h2>Signature Dining Experiences</h2>
-            <p>Savor world-class cuisine inspired by Egyptian heritage and global flavors</p>
+    <section id="restaurants">
+        <div class="container">
+            <div class="section-title">
+                <h2>Signature Dining Experiences</h2>
+                <p>Savor world-class cuisine inspired by Egyptian heritage and global flavors</p>
+            </div>
+
+            <div class="rooms-grid">
+
+                <!-- Restaurant 1 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="images/img1.jpg" alt="Pharaoh’s Feast">
+                    </div>
+
+                    <div class="room-info">
+                        <h3>Pharaoh’s Feast</h3>
+
+                        <div class="room-availability availability-available">
+                            <i class="fas fa-check-circle"></i> Open Now
+                        </div>
+
+                        <div class="room-price">
+                            $$$ <span> · Fine Dining</span>
+                        </div>
+
+                        <p>
+                            An opulent fine-dining restaurant serving authentic cuisine with a modern twist.
+                        </p>
+
+                        <div class="room-features">
+                            <span class="room-feature">Egyptian Cuisine</span>
+                            <span class="room-feature">Live Music</span>
+
+                        </div>
+
+                        <div class="room-actions">
+                            <a href="#" class="btn">View Menu</a>
+                            <a href="#" class="btn btn-outline">Reserve Table</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant 2 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="images/img2.jpg" alt="Nile Breeze Café">
+                    </div>
+
+                    <div class="room-info">
+                        <h3>Nile Breeze Café</h3>
+
+                        <div class="room-availability availability-available">
+                            <i class="fas fa-check-circle"></i> Open Now
+                        </div>
+
+                        <div class="room-price">
+                            $$ <span> · Café & Lounge</span>
+                        </div>
+
+                        <p>
+                            A relaxed café overlooking the gardens, perfect for fresh coffee, juices, and light meals.
+                        </p>
+
+                        <div class="room-features">
+                            <span class="room-feature">Fresh Coffee</span>
+                            <span class="room-feature">Outdoor Seating</span>
+                            <span class="room-feature">Free Wi-Fi</span>
+                        </div>
+
+                        <div class="room-actions">
+                            <a href="#" class="btn">View Menu</a>
+                            <a href="#" class="btn btn-outline">Reserve Table</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Restaurant 3 (Closed) -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="images/img3.jpg" alt="Golden Pyramid Grill">
+
+
+                    </div>
+
+                    <div class="room-info">
+                        <h3>Golden Pyramid Grill</h3>
+
+                        <div class="room-availability availability-unavailable">
+                            <i class="fas fa-times-circle"></i> Currently Closed
+                        </div>
+
+                        <div class="room-price">
+                            $$$ <span> · International Buffet</span>
+                        </div>
+
+                        <p>
+                            A lavish buffet offering international flavors, live cooking stations, and family dining.
+                        </p>
+
+                        <div class="room-features">
+                            <span class="room-feature">Buffet</span>
+                            <span class="room-feature">Live Cooking</span>
+                            <span class="room-feature">Family Friendly</span>
+                        </div>
+
+                        <div class="room-actions">
+                            <a href="#" class="btn">View Menu</a>
+                            <button class="btn">
+                                Not Available
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
 
-        <div class="rooms-grid">
-
-            <!-- Restaurant 1 -->
-            <div class="room-card">
-                <div class="room-image">
-                    <img src="images/img1.jpg"
-                         alt="Pharaoh’s Feast">
-                </div>
-
-                <div class="room-info">
-                    <h3>Pharaoh’s Feast</h3>
-
-                    <div class="room-availability availability-available">
-                        <i class="fas fa-check-circle"></i> Open Now
-                    </div>
-
-                    <div class="room-price">
-                        $$$ <span> · Fine Dining</span>
-                    </div>
-
-                    <p>
-                        An opulent fine-dining restaurant serving authentic cuisine with a modern twist.
-                    </p>
-
-                    <div class="room-features">
-                        <span class="room-feature">Egyptian Cuisine</span>
-                        <span class="room-feature">Live Music</span>
-                        
-                    </div>
-
-                    <div class="room-actions">
-                        <a href="#" class="btn">View Menu</a>
-                        <a href="#" class="btn btn-outline">Reserve Table</a>
-                    </div>
-                </div>
+    <!-- Spa Section -->
+    <section id="spa" style="padding: 80px 0; background: #f8f4ef;">
+        <div style="border: 2px solid #c19a53; padding: 20px; border-radius: 5px;" class="container">
+            <div class="section-title">
+                <h2>Luxury Spa & Wellness</h2>
+                <p>Rejuvenate your body and soul with ancient Egyptian treatments</p>
             </div>
 
-            <!-- Restaurant 2 -->
-            <div class="room-card">
-                <div class="room-image">
-                    <img src="images/img2.jpg"
-                         alt="Nile Breeze Café">
+            <div class="coming-soon-content">
+                <div class="coming-soon-text">
+                    <h3>AMUNRA Wellness Sanctuary</h3>
+                    <p>Escape to our world-class spa, where ancient Egyptian wellness practices meet modern luxury.
+                        Our expert therapists blend traditional techniques with contemporary treatments to create an
+                        unforgettable journey of rejuvenation and relaxation amidst serene surroundings inspired by
+                        the mystique of the Nile.</p>
+                    <ul>
+                        <li><i class="fas fa-spa"></i> Traditional Egyptian Therapies</li>
+                        <li><i class="fas fa-leaf"></i> Organic & Natural Products</li>
+                        <li><i class="fas fa-gem"></i> Signature Treatments</li>
+                        <li><i class="fas fa-hot-tub"></i> Steam & Sauna Facilities</li>
+                        <li><i class="fas fa-massage"></i> Professional Massage Therapists</li>
+                    </ul>
+                    <a href="#contact" class="btn-learn-more">Book a Treatment</a>
                 </div>
 
-                <div class="room-info">
-                    <h3>Nile Breeze Café</h3>
-
-                    <div class="room-availability availability-available">
-                        <i class="fas fa-check-circle"></i> Open Now
-                    </div>
-
-                    <div class="room-price">
-                        $$ <span> · Café & Lounge</span>
-                    </div>
-
-                    <p>
-                        A relaxed café overlooking the gardens, perfect for fresh coffee, juices, and light meals.
-                    </p>
-
-                    <div class="room-features">
-                        <span class="room-feature">Fresh Coffee</span>
-                        <span class="room-feature">Outdoor Seating</span>
-                        <span class="room-feature">Free Wi-Fi</span>
-                    </div>
-
-                    <div class="room-actions">
-                        <a href="#" class="btn">View Menu</a>
-                        <a href="#" class="btn btn-outline">Reserve Table</a>
-                    </div>
+                <div class="coming-soon-image">
+                    <img src="images/img4.jpg" alt="AMUNRA Wellness Sanctuary">
                 </div>
             </div>
-
-            <!-- Restaurant 3 (Closed) -->
-            <div class="room-card">
-                <div class="room-image">
-                    <img src="images/img3.jpg"
-                         alt="Golden Pyramid Grill">
-
-                    
-                </div>
-
-                <div class="room-info">
-                    <h3>Golden Pyramid Grill</h3>
-
-                    <div class="room-availability availability-unavailable">
-                        <i class="fas fa-times-circle"></i> Currently Closed
-                    </div>
-
-                    <div class="room-price">
-                        $$$ <span> · International Buffet</span>
-                    </div>
-
-                    <p>
-                        A lavish buffet offering international flavors, live cooking stations, and family dining.
-                    </p>
-
-                    <div class="room-features">
-                        <span class="room-feature">Buffet</span>
-                        <span class="room-feature">Live Cooking</span>
-                        <span class="room-feature">Family Friendly</span>
-                    </div>
-
-                    <div class="room-actions">
-                        <a href="#" class="btn">View Menu</a>
-                        <button class="btn" >
-                            Not Available
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Amenities Section -->
     <section id="amenities">
@@ -1709,7 +1744,7 @@ if ($menu_query) {
                             </div>
                             <div class="contact-text">
                                 <h4>Location</h4>
-                                <p>Nile Corniche, Luxor, Egypt</p>
+                                <p>At Port City - Colombo</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1718,7 +1753,7 @@ if ($menu_query) {
                             </div>
                             <div class="contact-text">
                                 <h4>Email</h4>
-                                <a href="mailto:reservations@nilepalace.com">reservations@nilepalace.com</a>
+                                <a href="mailto:reservations@nilepalace.com">amunracmb@gmail.com</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1727,7 +1762,7 @@ if ($menu_query) {
                             </div>
                             <div class="contact-text">
                                 <h4>Phone</h4>
-                                <a href="tel:+201234567890">+20 123 456 7890</a>
+                                <a href="tel:+201234567890">+94 771232323</a>
                             </div>
                         </div>
                     </div>
@@ -1809,7 +1844,7 @@ if ($menu_query) {
                     style="background: #f5f5dc; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #c19a53;">
                     <p style="color: #666; font-size: 0.9rem; margin: 0;">Selected Room</p>
                     <h3 id="modal-room-name" style="color: #c19a53; margin: 5px 0; font-size: 1.3rem;">Room Name</h3>
-                    <p id="modal-room-price" style="color: #8b7355; font-weight: 600; margin: 5px 0;">$0 / night</p>
+                    <p id="modal-room-price" style="color: #8b7355; font-weight: 600; margin: 5px 0;">LKR 0 / night</p>
                 </div>
 
                 <div style="margin-bottom: 18px;">
@@ -1901,11 +1936,13 @@ if ($menu_query) {
                         data-name="<?php echo htmlspecialchars($item['name']); ?>"
                         data-price="<?php echo $item['price']; ?>">
                         <h4 style="color: #c19a53; margin-bottom: 8px; font-size: 0.95rem;">
-                            <?php echo htmlspecialchars($item['name']); ?></h4>
+                            <?php echo htmlspecialchars($item['name']); ?>
+                        </h4>
                         <p style="color: #666; font-size: 0.85rem; margin-bottom: 10px;">
-                            <?php echo htmlspecialchars($item['description'] ?? ''); ?></p>
+                            <?php echo htmlspecialchars($item['description'] ?? ''); ?>
+                        </p>
                         <p style="color: #8b7355; font-weight: 600; font-size: 1.1rem;">
-                            $<?php echo number_format($item['price'], 2); ?></p>
+                            LKR <?php echo number_format($item['price'], 2); ?></p>
                         <button type="button" class="add-to-order"
                             style="width: 100%; padding: 8px; background: #c19a53; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: 600; margin-top: 10px;">
                             + Add
@@ -1920,7 +1957,7 @@ if ($menu_query) {
                 <div
                     style="border-top: 2px solid #ddd; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <h3 style="color: #333; margin: 0;">Order Total:</h3>
-                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">$<span
+                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">LKR <span
                             id="order-total">0.00</span></p>
                 </div>
             </div>
@@ -2122,7 +2159,7 @@ if ($menu_query) {
                     const price = btn.getAttribute('data-price');
 
                     document.getElementById('modal-room-name').textContent = roomName;
-                    document.getElementById('modal-room-price').textContent = '$' + parseFloat(price).toFixed(2) + ' / night';
+                    document.getElementById('modal-room-price').textContent = 'LKR ' + parseFloat(price).toFixed(2) + ' / night';
                     document.getElementById('form-room-name').value = roomName;
                     document.getElementById('form-room-id').value = roomId;
                     document.getElementById('form-price').value = price;
@@ -2249,10 +2286,10 @@ if ($menu_query) {
                 orderItem.innerHTML = `
                     <div style="flex: 1;">
                         <p style="margin: 0; color: #333; font-weight: 500;">${item.name}</p>
-                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">LKR ${item.price.toFixed(2)} x ${item.quantity}</p>
                     </div>
                     <div style="text-align: right;">
-                        <p style="margin: 0; color: #8b7355; font-weight: 600;">$${subtotal.toFixed(2)}</p>
+                        <p style="margin: 0; color: #8b7355; font-weight: 600;">LKR ${subtotal.toFixed(2)}</p>
                         <button type="button" class="remove-item" data-id="${itemId}" style="background: #ff6b6b; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">Remove</button>
                     </div>
                 `;

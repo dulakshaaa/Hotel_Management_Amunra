@@ -101,12 +101,12 @@ $grand_total = $subtotal + $tax;
                 </tr>
                 <tr>
                     <td><?php echo htmlspecialchars($reservation['room_name']); ?> (<?php echo $nights; ?> night<?php echo $nights > 1 ? 's' : ''; ?>)</td>
-                    <td style="text-align: right;">$<?php echo number_format($room_total, 2); ?></td>
+                    <td style="text-align: right;">LKR <?php echo number_format($room_total, 2); ?></td>
                 </tr>
                 <?php if ($food_total > 0): ?>
                 <tr>
                     <td>Food & Beverages</td>
-                    <td style="text-align: right;">$<?php echo number_format($food_total, 2); ?></td>
+                    <td style="text-align: right;">LKR <?php echo number_format($food_total, 2); ?></td>
                 </tr>
                 <?php endif; ?>
             </table>
@@ -122,15 +122,15 @@ $grand_total = $subtotal + $tax;
         <div class="total-section">
             <div class="total-row">
                 <span>Subtotal:</span>
-                <span>$<?php echo number_format($subtotal, 2); ?></span>
+                <span>LKR <?php echo number_format($subtotal, 2); ?></span>
             </div>
             <div class="total-row">
                 <span>Tax (10%):</span>
-                <span>$<?php echo number_format($tax, 2); ?></span>
+                <span>LKR <?php echo number_format($tax, 2); ?></span>
             </div>
             <div class="total-row grand">
                 <span>Grand Total:</span>
-                <span>$<?php echo number_format($grand_total, 2); ?></span>
+                <span>LKR <?php echo number_format($grand_total, 2); ?></span>
             </div>
         </div>
 

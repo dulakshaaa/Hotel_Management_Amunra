@@ -712,18 +712,18 @@ $bookings_query->close();
                                 <td>
                                     <div class="subtotal-section">
                                         <div class="subtotal-row">
-                                            <span>Room ($<?php echo number_format($booking['price'], 2); ?> × <?php echo $booking['nights']; ?> nights)</span>
-                                            <span>$<?php echo number_format($booking['room_subtotal'], 2); ?></span>
+                                            <span>Room (LKR <?php echo number_format($booking['price'], 2); ?> × <?php echo $booking['nights']; ?> nights)</span>
+                                            <span>LKR <?php echo number_format($booking['room_subtotal'], 2); ?></span>
                                         </div>
                                         <?php if ($booking['food_total'] > 0): ?>
                                             <div class="subtotal-row">
                                                 <span>Food & Beverages</span>
-                                                <span>$<?php echo number_format($booking['food_total'], 2); ?></span>
+                                                <span>LKR <?php echo number_format($booking['food_total'], 2); ?></span>
                                             </div>
                                         <?php endif; ?>
                                         <div class="subtotal-row total">
                                             <span>Total Due:</span>
-                                            <span>$<?php echo number_format($booking['total'], 2); ?></span>
+                                            <span>LKR <?php echo number_format($booking['total'], 2); ?></span>
                                         </div>
                                     </div>
                                 </td>
@@ -771,7 +771,7 @@ $bookings_query->close();
                         <div class="menu-item-info">
                             <div class="menu-item-name"><?php echo htmlspecialchars($item['name']); ?></div>
                             <div class="menu-item-desc"><?php echo htmlspecialchars($item['description'] ?? ''); ?></div>
-                            <div class="menu-item-price">$<?php echo number_format($item['price'], 2); ?></div>
+                            <div class="menu-item-price">LKR <?php echo number_format($item['price'], 2); ?></div>
                             <button type="button" class="add-to-order">+ Add</button>
                         </div>
                     </div>
@@ -783,7 +783,7 @@ $bookings_query->close();
                 <div id="order-items-list" style="margin-bottom: 15px; min-height: 50px;"></div>
                 <div style="border-top: 2px solid #c19a53; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <h3 style="color: #333; margin: 0;">Order Total:</h3>
-                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">$<span id="order-total">0.00</span></p>
+                    <p style="color: #8b7355; font-weight: 600; font-size: 1.3rem; margin: 0;">LKR <span id="order-total">0.00</span></p>
                 </div>
             </div>
 
@@ -909,10 +909,10 @@ $bookings_query->close();
                 orderItem.innerHTML = `
                     <div style="flex: 1;">
                         <p style="margin: 0; color: #333; font-weight: 500;">${item.name}</p>
-                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">$${item.price.toFixed(2)} x ${item.quantity}</p>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.85rem;">LKR ${item.price.toFixed(2)} x ${item.quantity}</p>
                     </div>
                     <div style="text-align: right;">
-                        <p style="margin: 0; color: #8b7355; font-weight: 600;">$${subtotal.toFixed(2)}</p>
+                        <p style="margin: 0; color: #8b7355; font-weight: 600;">LKR ${subtotal.toFixed(2)}</p>
                         <button type="button" class="remove-item" data-id="${itemId}" style="background: #ff6b6b; color: #fff; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 5px;">Remove</button>
                     </div>
                 `;
@@ -955,7 +955,7 @@ $bookings_query->close();
                 const data = await res.json();
 
                 if (data.success) {
-                    alert('✓ Food order added! Total: $' + data.total_amount.toFixed(2));
+                    alert('✓ Food order added! Total: LKR ' + data.total_amount.toFixed(2));
                     foodModal.style.display = 'none';
                     location.reload();
                 } else {
@@ -994,7 +994,7 @@ $bookings_query->close();
                                 <div class="order-item-info">
                                     <div class="order-item-name">${item.name}</div>
                                     <div class="order-item-qty"><strong>Qty:</strong> ${item.quantity}</div>
-                                    <div class="order-item-price">$${item.price.toFixed(2)} each = <strong>$${item.subtotal.toFixed(2)}</strong></div>
+                                    <div class="order-item-price">LKR ${item.price.toFixed(2)} each = <strong>LKR ${item.subtotal.toFixed(2)}</strong></div>
                                 </div>
                                 <button class="order-item-delete" onclick="deleteOrderItem(${data.order_id}, ${item.menu_item_id}, event)" title="Remove this item">
                                     ×

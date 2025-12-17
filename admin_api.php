@@ -178,7 +178,7 @@ try {
         // USERS
         // --------------------
         case 'list_users':
-            $res = $conn->query("SELECT id, username, email, created_at FROM users ORDER BY created_at DESC");
+            $res = $conn->query("SELECT id, username, email, fullname, contact_number, nic, created_at FROM users ORDER BY created_at DESC");
             $rows = $res->fetch_all(MYSQLI_ASSOC);
             echo json_encode(['success' => true, 'users' => $rows]);
             break;

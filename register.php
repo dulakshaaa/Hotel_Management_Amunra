@@ -4,19 +4,28 @@ require_once __DIR__ . '/config.php';
 
 
 $errors = [];
-$old = ['username' => '', 'email' => ''];
+$old = ['username' => '', 'email' => '', 'fullname' => '', 'contact_number' => '', 'nic' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    $fullname = trim($_POST['fullname'] ?? '');
+    $contact_number = trim($_POST['contact_number'] ?? '');
+    $nic = trim($_POST['nic'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm = $_POST['confirm'] ?? '';
 
     $old['username'] = $username;
     $old['email'] = $email;
+    $old['fullname'] = $fullname;
+    $old['contact_number'] = $contact_number;
+    $old['nic'] = $nic;
 
     if ($username === '') $errors[] = 'Username is required.';
     if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Valid email is required.';
+    if ($fullname === '') $errors[] = 'Full name is required.';
+    if ($contact_number === '') $errors[] = 'Contact number is required.';
+    if ($nic === '') $errors[] = 'NIC is required.';
     if (strlen($password) < 6) $errors[] = 'Password must be at least 6 characters.';
     if ($password !== $confirm) $errors[] = 'Passwords do not match.';
 
@@ -33,15 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Username or email already in use.';
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $insert = $conn->prepare('INSERT INTO users (username, email, password) VALUES (?, ?, ?)');
-            $insert->bind_param('sss', $username, $email, $hash);
+            $insert = $conn->prepare('INSERT INTO users (username, email, fullname, contact_number, nic, password) VALUES (?, ?, ?, ?, ?, ?)');
+            $insert->bind_param('ssssss', $username, $email, $fullname, $contact_number, $nic, $hash);
             $insert->execute();
             $user_id = (int)$conn->insert_id;
             $insert->close();
             // store logged-in user id in session
             $_SESSION['user_id'] = $user_id;
             // redirect to home
-            header('Location: home.php');
+            header('Location: login.php');
             exit;
         }
     }
@@ -84,8 +93,20 @@ h2{color:#c19a53;margin-bottom:10px;}
                 <input class="input" type="text" name="username" required value="<?php echo htmlspecialchars($old['username']); ?>">
             </label>
 
+            <label>Full Name
+                <input class="input" type="text" name="fullname" required value="<?php echo htmlspecialchars($old['fullname']); ?>">
+            </label>
+
             <label>Email
                 <input class="input" type="email" name="email" required value="<?php echo htmlspecialchars($old['email']); ?>">
+            </label>
+
+            <label>Contact Number
+                <input class="input" type="tel" name="contact_number" required value="<?php echo htmlspecialchars($old['contact_number']); ?>">
+            </label>
+
+            <label>NIC (National ID Card)
+                <input class="input" type="text" name="nic" required value="<?php echo htmlspecialchars($old['nic']); ?>">
             </label>
 
             <label>Password
